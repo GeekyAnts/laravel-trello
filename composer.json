@@ -1,0 +1,28 @@
+{
+  "name": "geekyants/trelloservice",
+  "description": "Package to access Trello Apis",
+  "authors": [
+    {
+      "name": "Mukul",
+      "email": "mukulp@geekyants.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "GeekyAnts\\TrelloService\\": "geekyants/trelloservice/src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "branch-alias": {
+        "dev-master": "1.0-dev"
+      },
+      "providers": [
+        "GeekyAnts\\TrelloService\\TrelloServiceProvider"
+      ]
+    }
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^6.3"
+  }
+}
