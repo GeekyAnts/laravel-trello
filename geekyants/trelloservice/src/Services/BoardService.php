@@ -258,7 +258,7 @@ class BoardService extends Trello
         return $this->verifyIdThenSendRequest($requestOptions);
     }
 
-    function addMemberByEmail($queryParams, $headers, $bodyParams)
+    function addMemberByEmail($queryParams, $headers, $bodyParams = [])
     {
         $requestOptions = [
             "id" => $this->id,
@@ -266,6 +266,7 @@ class BoardService extends Trello
             "path" => [
                 "boards",
                 $this->id,
+                "members
             ],
             "queryParams" =>  $queryParams,
             "headers" => $headers,
