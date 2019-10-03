@@ -266,7 +266,7 @@ class BoardService extends Trello
             "path" => [
                 "boards",
                 $this->id,
-                "members
+                "members"
             ],
             "queryParams" =>  $queryParams,
             "headers" => $headers,
