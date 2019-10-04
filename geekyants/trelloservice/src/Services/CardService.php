@@ -367,6 +367,7 @@ class CardService extends Trello
             return ["error" => "text should be present in query params"];
         }
         $requestOptions = [
+            "id" => $this->id,
             "requestMethod" => "POST",
             "path" => [
                 "cards",
@@ -383,6 +384,7 @@ class CardService extends Trello
     function addAttachment($queryParams = [])
     {
         $requestOptions = [
+            "id" => $this->id,
             "requestMethod" => "POST",
             "path" => [
                 "cards",
@@ -398,6 +400,7 @@ class CardService extends Trello
     function addChecklist($queryParams = [])
     {
         $requestOptions = [
+            "id" => $this->id,
             "requestMethod" => "POST",
             "path" => [
                 "cards",
@@ -413,6 +416,7 @@ class CardService extends Trello
     function addLabels($queryParams = [])
     {
         $requestOptions = [
+            "id" => $this->id,
             "requestMethod" => "POST",
             "path" => [
                 "cards",
@@ -428,6 +432,7 @@ class CardService extends Trello
     function addMembers($queryParams = [])
     {
         $requestOptions = [
+            "id" => $this->id,
             "requestMethod" => "POST",
             "path" => [
                 "cards",
@@ -445,6 +450,7 @@ class CardService extends Trello
             return ["error" => "label should be present in query params"];
         }
         $requestOptions = [
+            "id" => $this->id,
             "requestMethod" => "POST",
             "path" => [
                 "cards",
@@ -459,6 +465,7 @@ class CardService extends Trello
     function markNotificationsRead($queryParams = [])
     {
         $requestOptions = [
+            "id" => $this->id,
             "requestMethod" => "POST",
             "path" => [
                 "cards",
@@ -476,6 +483,7 @@ class CardService extends Trello
             return ["error" => "value should be present in query params"];
         }
         $requestOptions = [
+            "id" => $this->id,
             "requestMethod" => "POST",
             "path" => [
                 "cards",
@@ -506,6 +514,7 @@ class CardService extends Trello
         }
 
         $requestOptions = [
+            "id" => $this->id,
             "requestMethod" => "POST",
             "path" => [
                 "cards",
