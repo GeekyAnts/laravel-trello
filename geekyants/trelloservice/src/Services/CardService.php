@@ -446,8 +446,8 @@ class CardService extends Trello
 
     function addNewLabel($queryParams)
     {
-        if (!array_key_exists("label", $queryParams) || !$this->utils->isNotEmpty($queryParams["label"])) {
-            return ["error" => "label should be present in query params"];
+        if (!array_key_exists("color", $queryParams) || !$this->utils->isNotEmpty($queryParams["color"])) {
+            return ["error" => "color should be present in query params"];
         }
         $requestOptions = [
             "id" => $this->id,
