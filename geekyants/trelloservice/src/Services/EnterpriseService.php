@@ -120,7 +120,7 @@ class EnterpriseService extends Trello
         return $this->verifyIdThenSendRequest($requestOptions);
     }
 
-    function deactivateMember($idMember, $queryParams = [])
+    function deactivateMember($idMember, $queryParams)
     {
         $requestOptions = [
             "id" => $this->id,
