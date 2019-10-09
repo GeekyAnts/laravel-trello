@@ -28,7 +28,7 @@ class MemberService extends Trello
         return $this->verifyIdThenSendRequest($requestOptions);
     }
 
-    function fetchFeild($field, $queryParams = [])
+    function fetchField($field, $queryParams = [])
     {
         $requestOptions = [
             "id" => $this->id,

@@ -7,10 +7,14 @@ use GeekyAnts\TrelloService\Utils\Utils;
 
 class TokenService extends Trello
 {
-    function __construct($value)
+    function __construct($value = null)
     {
         parent::__construct();
         $this->id = $value;
+        if ($this->id == null) {
+            $this->id = $this->keyToken["token"];
+        }
+
         $this->utils = new Utils();
     }
 

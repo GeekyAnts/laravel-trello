@@ -258,7 +258,7 @@ class BoardService extends Trello
         return $this->verifyIdThenSendRequest($requestOptions);
     }
 
-    function addMemberByEmail($queryParams, $headers, $bodyParams)
+    function addMemberByEmail($queryParams, $headers, $bodyParams = [])
     {
         $requestOptions = [
             "id" => $this->id,
@@ -266,14 +266,15 @@ class BoardService extends Trello
             "path" => [
                 "boards",
                 $this->id,
+                "members"
             ],
             "queryParams" =>  $queryParams,
             "headers" => $headers,
             "bodyParams" => $bodyParams
         ];
-
+        
         if (!array_key_exists("email", $queryParams)) {
-            return ["error" => "Email should be present in query params"];
+            return ["error" => "email should be present in query params"];
         }
         if (!array_key_exists("type", $headers)) {
             return ["error" => "member type should be present in headers"];
@@ -296,7 +297,7 @@ class BoardService extends Trello
         ];
 
         if (!array_key_exists("type", $queryParams)) {
-            return ["error" => "Type should be present in query params"];
+            return ["error" => "type should be present in query params"];
         }
 
         return $this->verifyIdThenSendRequest($requestOptions);
@@ -316,7 +317,7 @@ class BoardService extends Trello
         ];
 
         if (!array_key_exists("type", $queryParams)) {
-            return ["error" => "Type should be present in query params"];
+            return ["error" => "type should be present in query params"];
         }
 
         if (!array_key_exists("idMembership", $queryParams)) {
@@ -464,7 +465,7 @@ class BoardService extends Trello
     {
 
         if (!array_key_exists('name', $queryParams)) {
-            return ["error" => "Name must be provided to create a Board"];
+            return ["error" => "name should be present in query params"];
         }
 
         $requestOptions = [
@@ -482,7 +483,7 @@ class BoardService extends Trello
         return $res;
     }
 
-    function enablePlugin($queryParams)
+    function enablePlugin($queryParams = [])
     {
         $requestOptions = [
             "id" => $this->id,
@@ -517,11 +518,28 @@ class BoardService extends Trello
             "requestMethod" => "POST",
             "path" => [
                 "boards",
-                $this->id, "EmailKey",
+                $this->id, "emailKey",
                 "generate",
             ],
         ];
         return $this->verifyIdThenSendRequest($requestOptions);
+    }
+    
+    
+    function addTag($queryParams){
+        $requestOptions = [
+            "id" => $this->id,
+            "requestMethod" => "POST",
+            "path" => [
+                "boards",
+                $this->id, "idTags",
+            ],
+            "queryParams" =>  $queryParams,
+        ];
+        if (!array_key_exists("value", $queryParams)) {
+            return ["error" => "value should be present in query params"];
+        }
+        
     }
 
     function createLabel($queryParams)
@@ -585,7 +603,7 @@ class BoardService extends Trello
             "requestMethod" => "POST",
             "path" => [
                 "boards",
-                $this->id, "lists",
+                $this->id, "powerUps",
             ],
             "queryParams" =>  $queryParams,
         ];

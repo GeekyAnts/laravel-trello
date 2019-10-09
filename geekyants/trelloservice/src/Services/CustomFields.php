@@ -19,20 +19,20 @@ class CustomFieldService extends Trello
     function create($bodyParams)
     {
         try {
-            if (!array_key_exists('idModel', $bodyParams)) {
-                throw new Exception("idModel i.e. The ID of the model for which the Custom Field is being defined. This should always be the ID of a board, must be provided to create a Custom Field");
+            if (!array_key_exists("idModel", $bodyParams)) {
+            throw new Exception("idModel should be present in query params");
             }
             if (!array_key_exists('modelType', $bodyParams)) {
-                throw new Exception("modelType i.e. The type of model that the Custom Field is being defined on. This should always be 'board', must be provided to create a Custom Field");
+                throw new Exception("modelType should be present in query params");
             }
             if (!array_key_exists('name', $bodyParams)) {
-                throw new Exception("The name of custom field must br provided to create a Custom Field");
+                throw new Exception("name should be present in query params");
             }
             if (!array_key_exists('type', $bodyParams)) {
-                throw new Exception("The type of custom field must br provided to create a Custom Field");
+                throw new Exception("type should be present in query params");
             }
             if (!array_key_exists('pos', $bodyParams)) {
-                throw new Exception("The pos of custom field must br provided to create a Custom Field");
+                throw new Exception("pos should be present in query params");
             }
 
             $requestOptions = [
@@ -52,7 +52,7 @@ class CustomFieldService extends Trello
         }
     }
 
-    function updateCustomField($bodyParams)
+    function updateCustomField($bodyParams = [])
     {
         $requestOptions = [
             "requestMethod" => "PUT",
@@ -100,7 +100,7 @@ class CustomFieldService extends Trello
             "id" => $this->id,
             "requestMethod" => "GET",
             "path" => [
-                "checklists",
+                "customFields",
                 $this->id,
                 "options"
             ],
@@ -111,14 +111,11 @@ class CustomFieldService extends Trello
 
     function fetchOption($idCustomFieldOption, $queryParams = [])
     {
-        if ($idCustomFieldOption == null || trim($idCustomFieldOption) == "") {
-            return ["error" => "The id of custom feild option must be provided"];
-        }
         $requestOptions = [
             "id" => $this->id,
             "requestMethod" => "GET",
             "path" => [
-                "checklists",
+                "customFields",
                 $this->id,
                 "options",
                 $idCustomFieldOption
@@ -145,10 +142,6 @@ class CustomFieldService extends Trello
 
     function deleteOption($idCustomFieldOption)
     {
-        if (!$this->utils->isNotEmpty($idCustomFieldOption)) {
-            return ["error" => "Id of custom field option must be provided to delete"];
-        }
-
         $requestOptions = [
             "id" => $this->id,
             "requestMethod" => "DELETE",
@@ -203,136 +196,5 @@ class CustomFieldService extends Trello
             "queryParams" => $queryParams
         ];
         return $this->sendRequest($requestOptions);
-    }
-
-    function fetchField($field, $queryParams = [])
-    {
-        if ($field == null || trim($field) == "") {
-            return ["error" => "Field must be provided"];
-        }
-        $requestOptions = [
-            "id" => $this->id,
-            "requestMethod" => "GET",
-            "path" => [
-                "checklists",
-                $this->id,
-                $field
-            ],
-            "queryParams" =>  $queryParams,
-        ];
-        return $this->verifyIdThenSendRequest($requestOptions);
-    }
-
-    function fetchBoard($queryParams = [])
-    {
-        $requestOptions = [
-            "id" => $this->id,
-            "requestMethod" => "GET",
-            "path" => [
-                "checklists",
-                $this->id,
-                "board"
-            ],
-            "queryParams" =>  $queryParams,
-        ];
-        return $this->verifyIdThenSendRequest($requestOptions);
-    }
-
-    function fetchCard($queryParams = [])
-    {
-        $requestOptions = [
-            "id" => $this->id,
-            "requestMethod" => "GET",
-            "path" => [
-                "checklists",
-                $this->id,
-                "cards"
-            ],
-            "queryParams" =>  $queryParams,
-        ];
-        return $this->verifyIdThenSendRequest($requestOptions);
-    }
-
-    function fetchCheckItems($queryParams = [])
-    {
-        $requestOptions = [
-            "id" => $this->id,
-            "requestMethod" => "GET",
-            "path" => [
-                "checklists",
-                $this->id,
-                "checkItems"
-            ],
-            "queryParams" =>  $queryParams,
-        ];
-        return $this->verifyIdThenSendRequest($requestOptions);
-    }
-
-    function fetchCheckItem($idCheckItem, $queryParams = [])
-    {
-        if ($idCheckItem == null || trim($idCheckItem) == "") {
-            return ["error" => "Id of checkItem must be provided"];
-        }
-        $requestOptions = [
-            "id" => $this->id,
-            "requestMethod" => "GET",
-            "path" => [
-                "checklists",
-                $this->id,
-                "checkItems",
-                $idCheckItem
-            ],
-            "queryParams" =>  $queryParams,
-        ];
-        return $this->verifyIdThenSendRequest($requestOptions);
-    }
-
-    function update($queryParams = [])
-    {
-        $requestOptions = [
-            "id" => $this->id,
-            "requestMethod" => "PUT",
-            "path" => [
-                "checklists",
-                $this->id
-            ],
-            "queryParams" =>  $queryParams,
-        ];
-
-        return $this->verifyIdThenSendRequest($requestOptions);
-    }
-
-    function updateName($queryParams = [])
-    {
-        $requestOptions = [
-            "id" => $this->id,
-            "requestMethod" => "PUT",
-            "path" => [
-                "checklists",
-                $this->id,
-                "name"
-            ],
-            "queryParams" =>  $queryParams,
-        ];
-
-        if (!array_key_exists("value", $queryParams)) {
-            return ["error" => "value should be present in query params"];
-        }
-        return $this->verifyIdThenSendRequest($requestOptions);
-    }
-
-    function deleteCheckItem($idCheckItem)
-    {
-        $requestOptions = [
-            "id" => $this->id,
-            "requestMethod" => "DELETE",
-            "path" => [
-                "checklists",
-                $this->id,
-                "checkItems",
-                $idCheckItem
-            ],
-        ];
-        return $this->verifyIdThenSendRequest($requestOptions);
     }
 }

@@ -16,8 +16,8 @@ class CheckListService extends Trello
 
     function create($queryParams)
     {
-        if (!array_key_exists('idCard', $queryParams)) {
-            return ["error" =>  "The ID of the card that the checklist should be added to must be provided to create a checklist"];
+        if (!array_key_exists("idCard", $queryParams)) {
+            return ["error" => "idCard should be present in query params"];
         }
 
         $requestOptions = [
@@ -36,11 +36,12 @@ class CheckListService extends Trello
 
     function createCheckItem($queryParams)
     {
-        if (!array_key_exists('name', $queryParams)) {
-            return ["error" => "name must be provided to create a check Item in query Params"];
+        if (!array_key_exists("name", $queryParams)) {
+            return ["error" => "name should be present in query params"];
         }
 
         $requestOptions = [
+            "id" => $this->id,
             "requestMethod" => "POST",
             "path" => [
                 "checklists",
@@ -50,7 +51,7 @@ class CheckListService extends Trello
             "queryParams" =>  $queryParams,
         ];
 
-        $this->verifyIdThenSendRequest($requestOptions);
+        return $this->verifyIdThenSendRequest($requestOptions);
     }
 
     function fetch($queryParams = [])
@@ -69,9 +70,6 @@ class CheckListService extends Trello
 
     function fetchField($field, $queryParams = [])
     {
-        if ($field == null || trim($field) == "") {
-            return ["error" => "Field must be provided"];
-        }
         $requestOptions = [
             "id" => $this->id,
             "requestMethod" => "GET",
@@ -101,7 +99,7 @@ class CheckListService extends Trello
     }
 
 
-    function fetchCard($queryParams = [])
+    function fetchCards($queryParams = [])
     {
         $requestOptions = [
             "id" => $this->id,
@@ -133,9 +131,6 @@ class CheckListService extends Trello
 
     function fetchCheckItem($idCheckItem, $queryParams = [])
     {
-        if ($idCheckItem == null || trim($idCheckItem) == "") {
-            return ["error" => "Id of checkItem must be provided"];
-        }
         $requestOptions = [
             "id" => $this->id,
             "requestMethod" => "GET",
