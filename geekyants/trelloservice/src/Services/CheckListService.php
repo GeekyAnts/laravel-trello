@@ -21,6 +21,7 @@ class CheckListService extends Trello
         }
 
         $requestOptions = [
+            "id" => this->id,
             "requestMethod" => "POST",
             "path" => [
                 "checklists",
