@@ -289,7 +289,7 @@ class OrganizationService extends Trello
         return $res;
     }
 
-    function setLogo($queryParams)
+    function setLogo($queryParams =[])
     {
 
         $requestOptions = [
@@ -326,7 +326,7 @@ class OrganizationService extends Trello
         return $this->verifyIdThenSendRequest($requestOptions);
     }
 
-    function export($queryParams)
+    function export($queryParams=[])
     {
         $requestOptions = [
             "id" => $this->id,
