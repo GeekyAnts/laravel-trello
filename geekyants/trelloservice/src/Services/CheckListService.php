@@ -51,7 +51,7 @@ class CheckListService extends Trello
             "queryParams" =>  $queryParams,
         ];
 
-        $this->verifyIdThenSendRequest($requestOptions);
+        return $this->verifyIdThenSendRequest($requestOptions);
     }
 
     function fetch($queryParams = [])
